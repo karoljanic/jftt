@@ -14,8 +14,8 @@ int yylex();
 %%
     BEGIN(START);
 
-<START>[^\\](\\\\)*\'           		{ ECHO; BEGIN(SINGLE_PARENTHESIS); }
-<START>[^\\](\\\\)*\"           		{ ECHO; BEGIN(DOUBLE_PARENTHESIS); }
+<START>\'           					{ ECHO; BEGIN(SINGLE_PARENTHESIS); }
+<START>\"           					{ ECHO; BEGIN(DOUBLE_PARENTHESIS); }
 <START>\<!\[CDATA\[						{ ECHO; BEGIN(CDATA); }
 
 <NEUTRAL>\'           					{ ECHO; BEGIN(SINGLE_PARENTHESIS); }
