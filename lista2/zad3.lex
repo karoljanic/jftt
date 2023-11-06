@@ -18,11 +18,11 @@ BREAK_LINE      (\\\n.*)*
 <STRING>[^\\](\\\\)*\"                                                                                          { ECHO; BEGIN(INITIAL); /* exit string */ }
 
 <INITIAL>(\/{BREAK_LINE}\*{BREAK_LINE}\*)|(\/{BREAK_LINE}\*{BREAK_LINE}!)				                        { if(saveDocumentation) { ECHO; } BEGIN(DOCUMENTATION); /* enter to multiline doc */ };
-<DOCUMENTATION>.*{BREAK_LINE}\*{BREAK_LINE}\/						                                            { if(saveDocumentation) { ECHO; } BEGIN(INITIAL); /* exit multiline doc */ };
+<DOCUMENTATION>{BREAK_LINE}\*{BREAK_LINE}\/						                                                { if(saveDocumentation) { ECHO; } BEGIN(INITIAL); /* exit multiline doc */ };
 <DOCUMENTATION>.							                                                                    { if(saveDocumentation) { ECHO; } /* remove or save multiline documentation */ };
 
 <INITIAL>\/{BREAK_LINE}\*							                                                            { BEGIN(MULTILINE_COMMENT); /* enter to multiline comment */};
-<MULTILINE_COMMENT>.*{BREAK_LINE}\*{BREAK_LINE}\/				                                                { BEGIN(INITIAL); /* exit multiline comment */ };
+<MULTILINE_COMMENT>{BREAK_LINE}\*{BREAK_LINE}\/				                                                    { BEGIN(INITIAL); /* exit multiline comment */ };
 <MULTILINE_COMMENT>.                                                                                            { /* remove multiline comment */ }
 
 <INITIAL>((\/{BREAK_LINE}\/{BREAK_LINE}\/)|(\/{BREAK_LINE}\/{BREAK_LINE}!)).*{BREAK_LINE}.*$                    { if(saveDocumentation) { ECHO; } /* remove or save single doc comments */ }
