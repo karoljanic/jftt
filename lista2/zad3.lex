@@ -12,8 +12,12 @@ BREAK_LINE      (\\\n.*)*
 %s STRING
 %s DOCUMENTATION
 %s MULTILINE_COMMENT
+%s INCLUDE
 
 %%
+<INITIAL>#include[[:blank:]]*<                                                                                  { ECHO; BEGIN(INCLUDE); }
+<INCLUDE>>                                                                                                      { ECHO; BEGIN(INITIAL); }
+
 <INITIAL>\"                                                                                                     { ECHO; BEGIN(STRING); /* enter to string */ }
 <STRING>[^\\](\\\\)*\"                                                                                          { ECHO; BEGIN(INITIAL); /* exit string */ }
 
