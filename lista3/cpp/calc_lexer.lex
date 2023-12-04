@@ -7,7 +7,7 @@ int yylex();
 %}
 
 BREAK_LINE      \\\n
-COMMENT         ^#.*{BREAK_LINE}*.*$
+COMMENT         ^#(.*{BREAK_LINE})*.*$
 
 %%
 {COMMENT}                   ;
