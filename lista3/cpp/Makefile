@@ -2,7 +2,7 @@ FF := flex
 FFLAGS :=
 BB := bison
 BFLAGS :=
-CXX := g++
+CXX := clang++
 CXXFLAGS := -Wall -Wextra -pedantic -std=c++17
 
 all: flex bison
